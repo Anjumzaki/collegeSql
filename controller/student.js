@@ -19,7 +19,8 @@ module.exports = {
     let motherName = req.body.motherName;
     let address = req.body.address;
     let description = req.body.description;
-    let className = req.body.className;
+    let classID = req.body.classID;
+    let avatar = req.body.avatar
     if (firstName) {
       if (lastName) {
         if (dateoOfBirth) {
@@ -27,7 +28,7 @@ module.exports = {
             if (contact) {
               if (bloodGroup) {
                 let query =
-                  "INSERT INTO place(firstName,lastName,dateoOfBirth,placeOfbirth,contact,bloodGroup,studentCnic,phoneNo,gender,mobileNo1,email,placeActive,fax,fee,fatherCnic,) VALUES('" +
+                  "INSERT INTO student(firstName,lastName,dateoOfBirth,placeOfbirth,contact,bloodGroup,studentCnic,phoneNo,gender,mobileNo1,email,placeActive,fax,fee,fatherCnic,fatherName,motherName,address,description,classID,avatar,active) VALUES('" +
                   firstName +
                   "','" +
                   lastName +
@@ -49,6 +50,24 @@ module.exports = {
                   mobileNo1 +
                   "','" +
                   email +
+                  "','" +
+                  fax +
+                  "','" +
+                  fee +
+                  "','" +
+                  fatherCnic +
+                  "','" +
+                  fatherName +
+                  "','" +
+                  motherName +
+                  "','" +
+                  address +
+                  "','" +
+                  description +
+                  "','" +
+                  classID +
+                  "','" +
+                  avatar +
                   "','" +
                   "1" +
                   "')";
@@ -103,53 +122,116 @@ module.exports = {
       });
     }
   },
-  editCompany: (req, res) => {
+  editStudent: (req, res) => {
     console.log(req.body);
-    let placeName = req.body.placeName;
-    let imgUrl = req.body.imgUrl;
-    let imgUrl1 = req.body.imgUrl1;
-    let imgUrl2 = req.body.imgUrl2;
-    let placeDescription = req.body.placeDescription;
-    let noOfImage = req.body.noOfImage;
+    let firstName = req.body.firstName;
+    let lastName = req.body.lastName;
+    let dateoOfBirth = req.body.dateoOfBirth;
+    let placeOfbirth = req.body.placeOfbirth;
+    let contact = req.body.contact;
+    let bloodGroup = req.body.bloodGroup;
+    let studentCnic = req.body.studentCnic;
+    let phoneNo = req.body.phoneNo;
+    let gender = req.body.gender;
+    let mobileNo1 = req.body.mobileNo1;
+    let email = req.body.email;
+    let fax = req.body.fax;
+    let fee = req.body.fee;
+    let fatherCnic = req.body.fatherCnic;
+    let fatherName = req.body.fatherName;
+    let motherName = req.body.motherName;
     let address = req.body.address;
-    let categoryID = req.body.categoryID;
-    let audioUrl = req.body.audioUrl;
-    let placeActive = req.body.placeActive;
-    let lat = req.body.lat;
-    let lng = req.body.lng;
-    if (placeName) {
-      if (imgUrl) {
-        if (placeDescription) {
-          if (noOfImage) {
-            if (address) {
-              if (categoryID) {
+    let description = req.body.description;
+    let classID = req.body.classID;
+    let avatar = req.body.avatar
+    if (firstName) {
+      if (lastName) {
+        if (dateoOfBirth) {
+          if (placeOfbirth) {
+            if (contact) {
+              if (bloodGroup) {
                 // UPDATE Customers
                 // SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
                 // WHERE CustomerID = 1;
                 let query =
-                  "UPDATE place SET placeName = " +
+                  "UPDATE student SET firstName = " +
                   "'" +
-                  placeName +
-                  "'" +
-                  "," +
-                  "imgUrl=" +
-                  "'" +
-                  imgUrl +
+                  firstName +
                   "'" +
                   "," +
-                  "imgUrl1=" +
+                  "lastName=" +
                   "'" +
-                  imgUrl1 +
-                  "'" +
-                  "," +
-                  "imgUrl2=" +
-                  "'" +
-                  imgUrl2 +
+                  lastName +
                   "'" +
                   "," +
-                  "noOfImage=" +
+                  "dateoOfBirth=" +
                   "'" +
-                  noOfImage +
+                  dateoOfBirth +
+                  "'" +
+                  "," +
+                  "placeOfbirth=" +
+                  "'" +
+                  placeOfbirth +
+                  "'" +
+                  "," +
+                  "contact=" +
+                  "'" +
+                  contact +
+                  "'" +
+                  "," +
+                  "bloodGroup=" +
+                  "'" +
+                  bloodGroup +
+                  "'" +
+                  "," +
+                  "studentCnic=" +
+                  "'" +
+                  studentCnic +
+                  "'" +
+                  "," +
+                  "phoneNo=" +
+                  "'" +
+                  phoneNo +
+                  "'" +
+                  "," +
+                  "gender=" +
+                  "'" +
+                  gender +
+                  "'" +
+                  "," +
+                  "mobileNo1=" +
+                  "'" +
+                  mobileNo1 +
+                  "'" +
+                  "," +
+                  "email=" +
+                  "'" +
+                  email +
+                  "'" +
+                  "," +
+                  "fax=" +
+                  "'" +
+                  fax +
+                  "'" +
+                  "," +
+                  "fee=" +
+                  "'" +
+                  fee +
+                  "'" +
+                  "," +
+                  "fatherCnic=" +
+                  "'" +
+                  fatherCnic +
+                  "'" +
+                  "," +
+                  "fatherName=" +
+                  "'" +
+                  fatherName +
+                  "'" +
+                  "," +
+                  "motherName=" +
+                  "'" +
+                  motherName +
                   "'" +
                   "," +
                   "address=" +
@@ -157,36 +239,21 @@ module.exports = {
                   address +
                   "'" +
                   "," +
-                  "categoryID=" +
+                  "description=" +
                   "'" +
-                  categoryID +
-                  "'" +
-                  "," +
-                  "placeDescription=" +
-                  "'" +
-                  placeDescription +
+                  description +
                   "'" +
                   "," +
-                  "audioUrl=" +
+                  "classID=" +
                   "'" +
-                  audioUrl +
-                  "'" +
-                  "," +
-                  "lat=" +
-                  "'" +
-                  lat +
+                  classID +
                   "'" +
                   "," +
-                  "lng=" +
+                  "avatar=" +
                   "'" +
-                  lng +
+                  avatar +
                   "'" +
-                  "," +
-                  "placeActive=" +
-                  "'" +
-                  placeActive +
-                  "'" +
-                  " WHERE placeID=" +
+                  " WHERE stID=" +
                   req.params.id;
                 console.log(query);
                 db.query(query, (err, result) => {
@@ -240,9 +307,9 @@ module.exports = {
       });
     }
   },
-  getCompanies: (req, res) => {
+  getStudents: (req, res) => {
     let query =
-      "SELECT * FROM place";
+      "SELECT * FROM student LEFT JOIN student on student.classID=classes.classID";
     db.query(query, (err, result) => {
       if (err) {
         res.status(400).send({
@@ -258,10 +325,9 @@ module.exports = {
       }
     });
   },
-  getCompany: (req, res) => {
-    let query = "SELECT * FROM place WHERE placeID=" + req.params.id;
+  getStudent: (req, res) => {
     let query1 =
-      "SELECT * FROM `place` WHERE place.placeID=" +
+      "SELECT * FROM `student` WHERE stID=" +
       req.params.id;
     db.query(query1, (err, result) => {
       if (err) {
@@ -279,9 +345,9 @@ module.exports = {
     });
   },
 
-  getCompanyByCategID: (req, res) => {
+  getStudentyByclassID: (req, res) => {
     let query1 =
-      "SELECT * FROM `place`  WHERE place.categoryID=" +
+      "SELECT * FROM `student` LEFT JOIN student on student.classID=classes.classID  WHERE student.classID=" +
       req.params.id;
     db.query(query1, (err, result) => {
       if (err) {
@@ -297,9 +363,9 @@ module.exports = {
       }
     });
   },
-  deleteCompanies: (req, res) => {
+  deleteStudent: (req, res) => {
     let query =
-      "Delete FROM `place` WHERE placeID=" + req.params.id;
+      "Delete FROM `student` WHERE student=" + req.params.id;
     db.query(query, (err, result) => {
       if (err) {
         res.status(400).send({

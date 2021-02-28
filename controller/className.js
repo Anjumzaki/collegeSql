@@ -1,15 +1,19 @@
 module.exports = {
-  addCategory: (req, res) => {
-    let categoryName = req.body.categoryName;
-    let imgurl = req.body.imgurl;
-    if (categoryName) {
+  addClassName: (req, res) => {
+    let className = req.body.className;
+    let noOfSemester = req.body.noOfSemester;
+    let fee = req.body.fee;
+    let dated = req.body.dated;
+    if (className) {
       let query =
-        "INSERT INTO category(categoryName,imgurl,categoryActive) VALUES('" +
-        categoryName +
+        "INSERT INTO classes(className,noOfSemester,fee,creationDate) VALUES('" +
+        className +
         "','" +
-        imgurl +
+        noOfSemester +
         "','" +
-        "1" +
+        fee +
+        "','" +
+        dated +
         "')";
       db.query(query, (err, result) => {
         if (err) {
@@ -20,7 +24,7 @@ module.exports = {
         } else {
           res.status(201).send({
             success: "true",
-            message: "category added succesfully",
+            message: "class added succesfully",
             id: result.insertId,
           });
         }
@@ -28,35 +32,35 @@ module.exports = {
     } else {
       res.status(400).send({
         success: "false",
-        message: "categoryName is required",
+        message: "ClassName is required",
       });
     }
   },
-  editCategory: (req, res) => {
-    let categoryName = req.body.categoryName;
-    let imgurl = req.body.imgurl;
-    let categoryActive = req.body.categoryActive;
-    if (categoryName) {
-      if (imgurl) {
+  editClassName: (req, res) => {
+    let className = req.body.className;
+    let noOfSemester = req.body.noOfSemester;
+    let fee = req.body.fee;
+    if (className) {
+      if (noOfSemester) {
         // UPDATE Customers
         // SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
         // WHERE CustomerID = 1;
         let query =
-          "UPDATE category SET categoryName = " +
+          "UPDATE classes SET className = " +
           "'" +
-          categoryName +
-          "'" +
-          "," +
-          "imgurl=" +
-          "'" +
-          imgurl +
+          className +
           "'" +
           "," +
-          "categoryActive=" +
+          "noOfSemester=" +
           "'" +
-          categoryActive +
+          noOfSemester +
           "'" +
-          " WHERE categoryID=" +
+          "," +
+          "fee=" +
+          "'" +
+          fee +
+          "'" +
+          " WHERE classID=" +
           "'" +
           req.params.id +
           "'";
@@ -88,8 +92,8 @@ module.exports = {
       });
     }
   },
-  getCategories: (req, res) => {
-    let query = "SELECT * FROM category";
+  getClassNames: (req, res) => {
+    let query = "SELECT * FROM classes";
     db.query(query, (err, result) => {
       if (err) {
         res.status(400).send({
@@ -105,8 +109,8 @@ module.exports = {
       }
     });
   },
-  getCategory: (req, res) => {
-    let query = "SELECT * FROM category WHERE categoryID=" + req.params.id;
+  getClassName: (req, res) => {
+    let query = "SELECT * FROM classes WHERE classID=" + req.params.id;
     db.query(query, (err, result) => {
       if (err) {
         res.status(400).send({
@@ -121,8 +125,8 @@ module.exports = {
       }
     });
   },
-  deleteCategory: (req, res) => {
-    let query = "DELETE  FROM category WHERE categoryID=" + req.params.id;
+  deleteClassName: (req, res) => {
+    let query = "DELETE  FROM classes WHERE classID=" + req.params.id;
     db.query(query, (err, result) => {
       if (err) {
         res.status(400).send({

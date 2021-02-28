@@ -35,20 +35,21 @@ const {
 
 const {
   addStudent,
-  getCompanies,
-  getCompany,
-  editCompany,
-  deleteCompanies,
-  getCompanyByCategID
+  getStudents,
+  getStudent,
+  editStudent,
+  deleteStudent,
+  getStudentyByclassID
 } = require("./controller/student.js");
 
 const {
-  addCategory,
-  getCategories,
-  editCategory,
-  getCategory,
-  deleteCategory,
-} = require("./controller/category.js");
+  addClassName,
+  getClassName,
+  editClassName,
+  getClassName,
+  deleteClassName,
+  getClassNames,
+} = require("./controller/className.js");
 
 const {
   addSubCategory,
@@ -119,20 +120,20 @@ app.get("/v1/checkEmail/:id", checkEmail);
 app.get("/v1/checkNumber/:id", checkNumber);
 app.post("/v1/forgotPassword/", forgotPassword);
 
-//companies
-app.get("/v1/place", checkAuth, getCompanies);
-app.post("/v1/place", checkAuth, addStudent);
-app.put("/v1/place/:id", checkAuth, editCompany);
-app.post("/v1/place/:id", checkAuth, getCompany);
-app.delete("/v1/place/:id", checkAuth, deleteCompanies);
-app.get("/v1/placeyCateg/:id", checkAuth, getCompanyByCategID);
+//Students
+app.get("/v1/student", checkAuth, getStudents);
+app.post("/v1/student", checkAuth, addStudent);
+app.put("/v1/student/:id", checkAuth, editStudent);
+app.post("/v1/student/:id", checkAuth, getStudent);
+app.delete("/v1/student/:id", checkAuth, deleteStudent);
+app.get("/v1/studentyByClassName/:id", checkAuth, getStudentyByclassID);
 
 // //Category
-app.get("/v1/category", checkAuth, getCategories);
-app.post("/v1/category", checkAuth, addCategory);
-app.put("/v1/category/:id", checkAuth, editCategory);
-app.post("/v1/category/:id", checkAuth, getCategory);
-app.delete("/v1/category/:id", checkAuth, deleteCategory);
+app.get("/v1/class", checkAuth, getClassNames);
+app.post("/v1/class", checkAuth, addClassName);
+app.put("/v1/class/:id", checkAuth, editClassName);
+app.post("/v1/class/:id", checkAuth, getClassName);
+app.delete("/v1/class/:id", checkAuth, deleteClassName);
 
 
 app.get("/v1/email/verification/:email/:num", async (req, res) => {
