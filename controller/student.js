@@ -309,7 +309,7 @@ module.exports = {
   },
   getStudents: (req, res) => {
     let query =
-      "SELECT * FROM student LEFT JOIN student on student.classID=classes.classID";
+      "SELECT * FROM student LEFT JOIN classes on student.classID=classes.classID";
     db.query(query, (err, result) => {
       if (err) {
         res.status(400).send({
@@ -347,7 +347,7 @@ module.exports = {
 
   getStudentyByclassID: (req, res) => {
     let query1 =
-      "SELECT * FROM `student` LEFT JOIN student on student.classID=classes.classID  WHERE student.classID=" +
+      "SELECT * FROM `student` LEFT JOIN classes on student.classID=classes.classID  WHERE student.classID=" +
       req.params.id;
     db.query(query1, (err, result) => {
       if (err) {
