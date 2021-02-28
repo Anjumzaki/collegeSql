@@ -39,7 +39,7 @@ const {
   editCompany,
   deleteCompanies,
   getCompanyByCategID
-} = require("./controller/company.js");
+} = require("./controller/student.js");
 
 const {
   addCategory,

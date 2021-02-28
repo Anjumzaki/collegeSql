@@ -47,7 +47,7 @@ module.exports = {
                       "INSERT INTO user(userName,password,name,inCode,phone,gender,type,avatar,isActive,creationDate,updatedDate,email) VALUES('" +
                       userName +
                       "','" +
-                      password +
+                      hash +
                       "','" +
                       name +
                       "','" +
@@ -162,7 +162,6 @@ module.exports = {
     let avatar = req.body.avatar;
     let isActive = req.body.isActive
     let updatedDate = new Date()
-
     let query =
       "UPDATE user SET userName = " +
       "'" +

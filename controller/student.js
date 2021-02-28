@@ -1,11 +1,10 @@
 module.exports = {
-  addCompany: (req, res) => {
+  addStudent: (req, res) => {
     console.log(req.body);
     let placeName = req.body.placeName;
     let imgUrl = req.body.imgUrl;
     let imgUrl1 = req.body.imgUrl1;
     let imgUrl2 = req.body.imgUrl2;
-
     let placeDescription = req.body.placeDescription;
     let noOfImage = req.body.noOfImage;
     let address = req.body.address;
