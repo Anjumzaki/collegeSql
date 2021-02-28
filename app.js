@@ -116,8 +116,6 @@ app.post("/v1/login/user", userLogin);
 app.get("/v1/checkEmail/:id", checkEmail);
 app.get("/v1/checkNumber/:id", checkNumber);
 app.post("/v1/forgotPassword/", forgotPassword);
-app.post("/v1/fbLogin/", fbLogin);
-app.post("/v1/googleLogin/", googleLogin);
 
 //companies
 app.get("/v1/place", checkAuth, getCompanies);
