@@ -4,22 +4,15 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   addUser: async (req, res) => {
     console.log(req.body);
-    let name = req.body.name;
-    let dob = req.body.dob;
-    let gender = req.body.gender;
-    let email = req.body.email;
-    let mobile = req.body.mobile;
+    let userName = req.body.userName;
     let password = req.body.password;
+    let name = req.body.name;
+    let inCode = req.body.inCode;
+    let phone = req.body.phone;
+    let gender = req.body.gender;
     let type = req.body.type;
-    let unit = req.body.unit;
-    let height = req.body.height;
-    let notification = req.body.notification;
-    let clientId = req.body.clientId;
-    let weight = req.body.weight
     let avatar = req.body.avatar;
-    let loggedType = req.body.loggedType;
-    let fbID = req.body.fbID
-    let GID = req.body.GID;
+    let isActive = req.body.isActive
     let creationDate = new Date();
     let updatedDate = new Date()
     if (name) {
@@ -50,44 +43,28 @@ module.exports = {
                     });
                   } else {
                     let query =
-                      "INSERT INTO user(name,avatar,loggedType,fbID,GID,unit,height,notification,weight,clientId,dob,gender,email,mobile,password,type,creationDate,updatedDate,isActive) VALUES('" +
+                      "INSERT INTO user(userName,password,name,inCode,phone,gender,type,avatar,isActive,creationDate,updatedDate) VALUES('" +
+                      userName +
+                      "','" +
+                      password +
+                      "','" +
                       name +
                       "','" +
-                      avatar +
+                      inCode +
                       "','" +
-                      loggedType +
-                      "','" +
-                      fbID +
-                      "','" +
-                      GID +
-                      "','" +
-                      unit +
-                      "','" +
-                      height +
-                      "','" +
-                      notification +
-                      "','" +
-                      weight +
-                      "','" +
-                      clientId +
-                      "','" +
-                      dob +
+                      phone +
                       "','" +
                       gender +
                       "','" +
-                      email +
-                      "','" +
-                      mobile +
-                      "','" +
-                      hash +
-                      "','" +
                       type +
+                      "','" +
+                      avatar +
+                      "','" +
+                      isActive +
                       "','" +
                       creationDate +
                       "','" +
                       updatedDate +
-                      "','" +
-                      "1" +
                       "')";
                     console.log(query);
                     db.query(query, (err, result) => {
@@ -172,66 +149,61 @@ module.exports = {
   },
   editUser: (req, res) => {
     console.log(req.body);
+    let userName = req.body.userName;
+    let password = req.body.password;
     let name = req.body.name;
-    let mobile = req.body.mobile;
-    let updatedDate = new Date()
-    let dob = req.body.dob;
+    let inCode = req.body.inCode;
+    let phone = req.body.phone;
     let gender = req.body.gender;
-    let unit = req.body.unit;
-    let height = req.body.height;
-    let notification = req.body.notification;
-    let clientId = req.body.clientId;
-    let weight = req.body.weight
-    let avatar = req.body.avatar
-    let loggedType = req.body.loggedType;
-    let fbID = req.body.fbID
-    let GID = req.body.GID;
-    let year = req.body.year
+    let type = req.body.type;
+    let avatar = req.body.avatar;
+    let isActive = req.body.isActive
+    let updatedDate = new Date()
 
     let query =
-      "UPDATE user SET name = " +
+      "UPDATE user SET userName = " +
+      "'" +
+      userName +
+      "'" +
+      "," +
+      "password=" +
+      "'" +
+      password +
+      "'" +
+      "," +
+      "name=" +
       "'" +
       name +
       "'" +
       "," +
-      "unit=" +
+      "inCode=" +
       "'" +
-      unit +
-      "'" +
-      "," +
-      "loggedType=" +
-      "'" +
-      loggedType +
+      inCode +
       "'" +
       "," +
-      "fbID=" +
+      "phone=" +
       "'" +
-      fbID +
-      "'" +
-      "," +
-      "year=" +
-      "'" +
-      year +
+      phone +
       "'" +
       "," +
-      "GID=" +
+      "gender=" +
       "'" +
-      GID +
-      "'" +
-      "," +
-      "height=" +
-      "'" +
-      height +
+      gender +
       "'" +
       "," +
-      "notification=" +
+      "type=" +
       "'" +
-      notification +
+      type +
       "'" +
       "," +
-      "clientId=" +
+      "avatar=" +
       "'" +
-      clientId +
+      avatar +
+      "'" +
+      "," +
+      "isActive=" +
+      "'" +
+      isActive +
       "'" +
       "," +
       "weight=" +
@@ -392,24 +364,16 @@ module.exports = {
           if (result) {
             const token = jwt.sign(
               {
-                email: user[0].email,
-                userId: user[0].userId,
+                userName: user[0].userName,
+                password: user[0].password,
                 name: user[0].name,
-                email: user[0].email,
-                mobile: user[0].mobile,
+                inCode: user[0].inCode,
+                phone: user[0].phone,
                 type: user[0].type,
                 gender: user[0].gender,
-                unit: user[0].unit,
-                height: user[0].height,
-                notification: user[0].notification,
-                clientId: user[0].clientId,
-                weight: user[0].weight,
                 avatar: user[0].avatar,
-                dob: user[0].dob,
-                year: user[0].year,
-                loggedType: user[0].loggedType,
-                fbID: user[0].fbID,
-                GID: user[0].GID,
+                isActive: user[0].isActive,
+                updatedDate: user[0].updatedDate,
               },
               "hereIsMySpecialToken",
               {
@@ -431,112 +395,6 @@ module.exports = {
           success: "false",
           message: "User Does not exists",
           // user: result,
-        });
-      }
-    });
-  },
-  fbLogin: (req, res) => {
-    let fbID = req.body.fbID;
-    let query =
-      "SELECT * FROM user WHERE fbID=" +
-      "'" +
-      fbID +
-      "'";
-    db.query(query, (err, user) => {
-      if (err) {
-        console.log(err);
-        return res.status(400).send({
-          success: "false",
-          message: err,
-        });
-      }
-      if (user.length > 0) {
-        const token = jwt.sign(
-          {
-            email: user[0].email,
-            userId: user[0].userId,
-            name: user[0].name,
-            email: user[0].email,
-            mobile: user[0].mobile,
-            type: user[0].type,
-            gender: user[0].gender,
-            unit: user[0].unit,
-            height: user[0].height,
-            notification: user[0].notification,
-            clientId: user[0].clientId,
-            weight: user[0].weight,
-            avatar: user[0].avatar,
-            dob: user[0].dob,
-            year: user[0].year,
-            loggedType: user[0].loggedType,
-            fbID: user[0].fbID,
-            GID: user[0].GID,
-          },
-          "hereIsMySpecialToken",
-          {
-            expiresIn: "720h",
-          }
-        );
-        return res.status(200).send({
-          message: "Auth successful",
-          token: token,
-        });
-      } else {
-        return res.status(401).send({
-          message: "Auth failed",
-        });
-      }
-    });
-  },
-  googleLogin: (req, res) => {
-    let GID = req.body.GID;
-    let query =
-      "SELECT * FROM user WHERE GID=" +
-      "'" +
-      GID +
-      "'";
-    db.query(query, (err, user) => {
-      if (err) {
-        console.log(err);
-        return res.status(400).send({
-          success: "false",
-          message: err,
-        });
-      }
-      if (user.length > 0) {
-        const token = jwt.sign(
-          {
-            email: user[0].email,
-            userId: user[0].userId,
-            name: user[0].name,
-            email: user[0].email,
-            mobile: user[0].mobile,
-            type: user[0].type,
-            gender: user[0].gender,
-            unit: user[0].unit,
-            height: user[0].height,
-            notification: user[0].notification,
-            clientId: user[0].clientId,
-            weight: user[0].weight,
-            avatar: user[0].avatar,
-            dob: user[0].dob,
-            year: user[0].year,
-            loggedType: user[0].loggedType,
-            fbID: user[0].fbID,
-            GID: user[0].GID,
-          },
-          "hereIsMySpecialToken",
-          {
-            expiresIn: "720h",
-          }
-        );
-        return res.status(200).send({
-          message: "Auth successful",
-          token: token,
-        });
-      } else {
-        return res.status(401).send({
-          message: "Auth failed",
         });
       }
     });

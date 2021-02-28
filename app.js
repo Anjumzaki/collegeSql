@@ -30,8 +30,6 @@ const {
   checkEmail,
   checkNumber,
   forgotPassword,
-  fbLogin,
-  googleLogin
 } = require("./controller/users.js");
 
 const {
