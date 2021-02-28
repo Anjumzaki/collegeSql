@@ -25,6 +25,7 @@ const {
   addUser,
   getUsers,
   getUser,
+  deleteUser,
   editUser,
   userLogin,
   checkEmail,
@@ -33,7 +34,7 @@ const {
 } = require("./controller/users.js");
 
 const {
-  addCompany,
+  addStudent,
   getCompanies,
   getCompany,
   editCompany,
@@ -109,6 +110,7 @@ app.get("/v1/recent/:id", checkAuth, getSubCategory);
 
 //users
 app.post("/v1/user", addUser);
+app.delete("/v1/user/:id", deleteUser);
 app.get("/v1/user", checkAuth, getUsers);
 app.get("/v1/user/:id", checkAuth, getUser);
 app.put("/v1/user/:id", editUser);
@@ -119,7 +121,7 @@ app.post("/v1/forgotPassword/", forgotPassword);
 
 //companies
 app.get("/v1/place", checkAuth, getCompanies);
-app.post("/v1/place", checkAuth, addCompany);
+app.post("/v1/place", checkAuth, addStudent);
 app.put("/v1/place/:id", checkAuth, editCompany);
 app.post("/v1/place/:id", checkAuth, getCompany);
 app.delete("/v1/place/:id", checkAuth, deleteCompanies);

@@ -401,4 +401,22 @@ module.exports = {
       }
     });
   },
+  deleteUser: (req, res) => {
+    let query =
+      "Delete FROM `user` WHERE userID=" + req.params.id;
+    db.query(query, (err, result) => {
+      if (err) {
+        res.status(400).send({
+          success: "false",
+          message: "Something is really bad happens",
+        });
+      } else {
+        res.status(201).send({
+          success: "true",
+          message: "user deleted succesfully",
+          result: result,
+        });
+      }
+    });
+  },
 };
