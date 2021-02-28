@@ -28,7 +28,7 @@ module.exports = {
             if (contact) {
               if (bloodGroup) {
                 let query =
-                  "INSERT INTO student(firstName,lastName,dateoOfBirth,placeOfbirth,contact,bloodGroup,studentCnic,phoneNo,gender,mobileNo1,email,placeActive,fax,fee,fatherCnic,fatherName,motherName,address,description,classID,avatar,active) VALUES('" +
+                  "INSERT INTO student(firstName,lastName,dateoOfBirth,placeOfbirth,contact,bloodGroup,studentCnic,phoneNo,gender,mobileNo1,email,fax,fee,fatherCnic,fatherName,motherName,address,description,classID,avatar,active) VALUES('" +
                   firstName +
                   "','" +
                   lastName +
