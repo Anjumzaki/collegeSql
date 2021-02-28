@@ -21,6 +21,8 @@ module.exports = {
     let description = req.body.description;
     let classID = req.body.classID;
     let avatar = req.body.avatar
+    let rollNo = req.body.rollNo
+
     if (firstName) {
       if (lastName) {
         if (dateoOfBirth) {
@@ -28,7 +30,7 @@ module.exports = {
             if (contact) {
               if (bloodGroup) {
                 let query =
-                  "INSERT INTO student(firstName,lastName,dateoOfBirth,placeOfbirth,contact,bloodGroup,studentCnic,phoneNo,gender,mobileNo1,email,fax,fee,fatherCnic,fatherName,motherName,address,description,classID,avatar,active) VALUES('" +
+                  "INSERT INTO student(firstName,lastName,dateoOfBirth,placeOfbirth,contact,bloodGroup,studentCnic,phoneNo,gender,mobileNo1,email,fax,fee,fatherCnic,fatherName,motherName,address,description,classID,rollNo,avatar,active) VALUES('" +
                   firstName +
                   "','" +
                   lastName +
@@ -66,6 +68,8 @@ module.exports = {
                   description +
                   "','" +
                   classID +
+                  "','" +
+                  rollNo +
                   "','" +
                   avatar +
                   "','" +
