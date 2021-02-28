@@ -46,7 +46,6 @@ const {
   addClassName,
   getClassName,
   editClassName,
-  getClassName,
   deleteClassName,
   getClassNames,
 } = require("./controller/className.js");
