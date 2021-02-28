@@ -14,7 +14,8 @@ module.exports = {
     let avatar = req.body.avatar;
     let isActive = req.body.isActive
     let creationDate = new Date();
-    let updatedDate = new Date()
+    let updatedDate = new Date();
+    let email = req.body.email
     if (name) {
       if (email) {
         let myQuery = "SELECT * FROM user where email=" + "'" + email + "'";
@@ -43,7 +44,7 @@ module.exports = {
                     });
                   } else {
                     let query =
-                      "INSERT INTO user(userName,password,name,inCode,phone,gender,type,avatar,isActive,creationDate,updatedDate) VALUES('" +
+                      "INSERT INTO user(userName,password,name,inCode,phone,gender,type,avatar,isActive,creationDate,updatedDate,email) VALUES('" +
                       userName +
                       "','" +
                       password +
@@ -65,6 +66,8 @@ module.exports = {
                       creationDate +
                       "','" +
                       updatedDate +
+                      "','" +
+                      email +
                       "')";
                     console.log(query);
                     db.query(query, (err, result) => {
