@@ -31,6 +31,7 @@ const {
   checkEmail,
   checkNumber,
   forgotPassword,
+  getUsersByInCode
 } = require("./controller/users.js");
 
 const {
@@ -39,7 +40,8 @@ const {
   getStudent,
   editStudent,
   deleteStudent,
-  getStudentyByclassID
+  getStudentyByclassID,
+  getStudentyByStInCodeID
 } = require("./controller/student.js");
 
 const {
@@ -90,7 +92,7 @@ app.get("/v1/getUserFriends/:id", checkAuth, getUserFriends);
 
 
 app.get("/v1/service/:id", checkAuth, getService);
-app.get("/v1/ref_prod_fav", checkAuth, getServices);
+app.get("/v1/services", checkAuth, getServices);
 app.post("/v1/service", checkAuth, addService);
 app.put("/v1/service/:id", checkAuth, editService);
 app.delete("/v1/service/:id", checkAuth, deleteService);
@@ -107,12 +109,15 @@ app.get("/v1/recent/:id", checkAuth, getSubCategory);
 app.post("/v1/user", addUser);
 app.delete("/v1/user/:id", deleteUser);
 app.get("/v1/user", checkAuth, getUsers);
+app.get("/v1/getUsersByInCode/:id", checkAuth, getUsersByInCode);
+
 app.get("/v1/user/:id", checkAuth, getUser);
 app.put("/v1/user/:id", editUser);
 app.post("/v1/login/user", userLogin);
 app.get("/v1/checkEmail/:id", checkEmail);
 app.get("/v1/checkNumber/:id", checkNumber);
 app.post("/v1/forgotPassword/", forgotPassword);
+
 
 //Students
 app.get("/v1/student", checkAuth, getStudents);
@@ -121,6 +126,8 @@ app.put("/v1/student/:id", checkAuth, editStudent);
 app.post("/v1/student/:id", checkAuth, getStudent);
 app.delete("/v1/student/:id", checkAuth, deleteStudent);
 app.get("/v1/studentyByClassName/:id", checkAuth, getStudentyByclassID);
+app.get("/v1/getStudentyByStInCodeID/:id", checkAuth, getStudentyByStInCodeID);
+
 
 // //Category
 app.get("/v1/class", checkAuth, getClassNames);

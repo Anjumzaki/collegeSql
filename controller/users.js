@@ -131,6 +131,23 @@ module.exports = {
       }
     });
   },
+  getUsersByInCode: (req, res) => {
+    let query =
+      "SELECT * FROM user WHERE inCode=" + req.params.id;
+    db.query(query, (err, result) => {
+      if (err) {
+        res.status(400).send({
+          success: "false",
+          message: "Something is really bad happens",
+        });
+      } else {
+        res.status(200).send({
+          success: "true",
+          result: result,
+        });
+      }
+    });
+  },
   getUser: (req, res) => {
     let query =
       "SELECT * FROM user WHERE userID=" +

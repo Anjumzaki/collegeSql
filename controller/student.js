@@ -22,7 +22,7 @@ module.exports = {
     let classID = req.body.classID;
     let avatar = req.body.avatar
     let rollNo = req.body.rollNo
-
+    let stInCode = req.body.stInCode
     if (firstName) {
       if (lastName) {
         if (dateoOfBirth) {
@@ -30,7 +30,7 @@ module.exports = {
             if (contact) {
               if (bloodGroup) {
                 let query =
-                  "INSERT INTO student(firstName,lastName,dateoOfBirth,placeOfbirth,contact,bloodGroup,studentCnic,phoneNo,gender,mobileNo1,email,fax,fee,fatherCnic,fatherName,motherName,address,description,classID,rollNo,avatar,active) VALUES('" +
+                  "INSERT INTO student(firstName,lastName,dateoOfBirth,placeOfbirth,contact,bloodGroup,studentCnic,phoneNo,gender,mobileNo1,email,fax,fee,fatherCnic,fatherName,motherName,address,description,classID,rollNo,avatar,stInCode,active) VALUES('" +
                   firstName +
                   "','" +
                   lastName +
@@ -72,6 +72,8 @@ module.exports = {
                   rollNo +
                   "','" +
                   avatar +
+                  "','" +
+                  stInCode +
                   "','" +
                   "1" +
                   "')";
@@ -148,6 +150,8 @@ module.exports = {
     let description = req.body.description;
     let classID = req.body.classID;
     let avatar = req.body.avatar
+    let stInCode = req.body.stInCode
+
     if (firstName) {
       if (lastName) {
         if (dateoOfBirth) {
@@ -256,6 +260,10 @@ module.exports = {
                   "avatar=" +
                   "'" +
                   avatar +
+                  "'" +
+                  "stInCode=" +
+                  "'" +
+                  stInCode +
                   "'" +
                   " WHERE stID=" +
                   req.params.id;
@@ -367,6 +375,25 @@ module.exports = {
       }
     });
   },
+  getStudentyByStInCodeID: (req, res) => {
+    let query1 =
+      "SELECT * FROM `student` LEFT JOIN classes on student.classID=classes.classID  WHERE student.stInCode=" +
+      req.params.id;
+    db.query(query1, (err, result) => {
+      if (err) {
+        res.status(400).send({
+          success: "false",
+          message: err,
+        });
+      } else {
+        res.status(201).send({
+          success: "true",
+          result: result,
+        });
+      }
+    });
+  },
+  
   deleteStudent: (req, res) => {
     let query =
       "Delete FROM `student` WHERE student=" + req.params.id;
