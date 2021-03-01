@@ -5,15 +5,19 @@ module.exports = {
     let serviceName = req.body.serviceName;
     let serviceDescription = req.body.serviceDescription;
     let serviceAmmount = req.body.serviceAmmount;
+    let serInCode = req.body.serInCode
     if (serviceName) {
       if (serviceAmmount) {
         let query =
-          "INSERT INTO service(serviceName,serviceDescription,serviceAmmount) VALUES('" +
+          "INSERT INTO service(serviceName,serviceDescription,serviceAmmount,serInCode) VALUES('" +
           serviceName +
           "','" +
           serviceDescription +
           "','" +
           serviceAmmount +
+          "','" +
+          serInCode
+          +
           "')";
         db.query(query, (err, result) => {
           if (err) {
@@ -113,6 +117,22 @@ module.exports = {
   },
   getService: (req, res) => {
     let query = "SELECT * FROM service WHERE serviceID=" + req.params.id;
+    db.query(query, (err, result) => {
+      if (err) {
+        res.status(400).send({
+          success: "false",
+          message: err,
+        });
+      } else {
+        res.status(201).send({
+          success: "true",
+          result: result,
+        });
+      }
+    });
+  },
+  getServicesBySerInCode: (req, res) => {
+    let query = "SELECT * FROM service WHERE serInCode=" + req.params.id;
     db.query(query, (err, result) => {
       if (err) {
         res.status(400).send({

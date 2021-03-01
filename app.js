@@ -63,6 +63,7 @@ const {
   getService,
   deleteService,
   getServices,
+  getServicesBySerInCode
 } = require("./controller/service.js");
 const {
   addFriend_req,
@@ -96,6 +97,8 @@ app.get("/v1/services", checkAuth, getServices);
 app.post("/v1/service", checkAuth, addService);
 app.put("/v1/service/:id", checkAuth, editService);
 app.delete("/v1/service/:id", checkAuth, deleteService);
+app.get("/v1/getServicesBySerInCode/:id", checkAuth, getServicesBySerInCode);
+
 
 
 
