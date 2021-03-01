@@ -1,16 +1,19 @@
 const e = require("express");
 
 module.exports = {
-  addRef_prod_fav: (req, res) => {
-    let userID = req.body.userID;
-    let placeID = req.body.placeID;
-    if (userID) {
-      if (placeID) {
+  addService: (req, res) => {
+    let serviceName = req.body.serviceName;
+    let serviceDescription = req.body.serviceDescription;
+    let serviceAmmount = req.body.serviceAmmount;
+    if (serviceName) {
+      if (serviceAmmount) {
         let query =
-          "INSERT INTO ref_prod_fav(userID,placeID) VALUES('" +
-          userID +
+          "INSERT INTO service(serviceName,serviceDescription,serviceAmmount) VALUES('" +
+          serviceName +
           "','" +
-          placeID +
+          serviceDescription +
+          "','" +
+          serviceAmmount +
           "')";
         db.query(query, (err, result) => {
           if (err) {
@@ -21,7 +24,7 @@ module.exports = {
           } else {
             res.status(201).send({
               success: "true",
-              message: "reference of fav added added succesfully",
+              message: "service added succesfully",
               id: result.insertId,
             });
           }
@@ -29,32 +32,38 @@ module.exports = {
       } else {
         res.status(400).send({
           success: "false",
-          message: "placeID is required",
+          message: "serviceAmmount is required",
         });
       }
     } else {
       res.status(400).send({
         success: "false",
-        message: "userID  is required",
+        message: "serviceName  is required",
       });
     }
   },
-  editRef_prod_fav: (req, res) => {
-    let userID = req.body.userID;
-    let placeID = req.body.placeID;
-    if (userID) {
-      if (placeID) {
+  editService: (req, res) => {
+    let serviceName = req.body.serviceName;
+    let serviceDescription = req.body.serviceDescription;
+    let serviceAmmount = req.body.serviceAmmount;
+    if (serviceName) {
+      if (serviceAmmount) {
         let query =
-          "UPDATE ref_prod_fav SET placeID = " +
+          "UPDATE service SET serviceName = " +
           "'" +
-          placeID +
+          serviceName +
           "'" +
           "," +
-          "userID=" +
+          "serviceDescription=" +
           "'" +
-          userID +
+          serviceDescription +
           "'" +
-          " WHERE favID=" +
+          "," +
+          "serviceAmmount=" +
+          "'" +
+          serviceAmmount +
+          "'" +
+          " WHERE serviceID=" +
           "'" +
           req.params.id +
           "'";
@@ -76,18 +85,18 @@ module.exports = {
       } else {
         res.status(400).send({
           success: "false",
-          message: "placeID is required",
+          message: "serviceAmmount is required",
         });
       }
     } else {
       res.status(400).send({
         success: "false",
-        message: "userID is required",
+        message: "serviceName is required",
       });
     }
   },
-  getRef_prod_fav: (req, res) => {
-    let query = "SELECT * FROM ref_prod_fav";
+  getServices: (req, res) => {
+    let query = "SELECT * FROM service";
     db.query(query, (err, result) => {
       if (err) {
         res.status(400).send({
@@ -102,8 +111,8 @@ module.exports = {
       }
     });
   },
-  getRef_prod_fav: (req, res) => {
-    let query = "SELECT * FROM ref_prod_fav WHERE favID=" + req.params.id;
+  getService: (req, res) => {
+    let query = "SELECT * FROM service WHERE serviceID=" + req.params.id;
     db.query(query, (err, result) => {
       if (err) {
         res.status(400).send({
@@ -118,8 +127,8 @@ module.exports = {
       }
     });
   },
-  deleteRef_prod_fav: (req, res) => {
-    let query = "DELETE FROM ref_prod_fav WHERE favID=" + req.params.id;
+  deleteService: (req, res) => {
+    let query = "DELETE FROM service WHERE serviceID=" + req.params.id;
     db.query(query, (err, result) => {
       if (err) {
         res.status(400).send({
@@ -130,47 +139,6 @@ module.exports = {
         res.status(200).send({
           success: "true",
           message: "reference of product deleted succesfully",
-          result: result,
-        });
-      }
-    });
-  },
-  userRef_prod_fav: (req, res) => {
-    let query =
-      "SELECT * FROM ref_prod_fav LEFT JOIN place on ref_prod_fav.placeID = place.placeID  where ref_prod_fav.userID=" +
-      req.params.id;
-    db.query(query, (err, result) => {
-      if (err) {
-        res.status(400).send({
-          success: "false",
-          message: err,
-        });
-      } else {
-        res.status(200).send({
-          success: "true",
-          //   message: "reference of product deleted succesfully",
-          result: result,
-        });
-      }
-    });
-  },
-  userStoreRef_prod_fav: (req, res) => {
-    let query =
-      "SELECT * FROM ref_prod_fav LEFT JOIN place on ref_prod_fav.placeID = place.placeID  where ref_prod_fav.userID=" +
-      req.params.id +
-      " AND items.storeID=" +
-      req.params.storeID;
-
-    db.query(query, (err, result) => {
-      if (err) {
-        res.status(400).send({
-          success: "false",
-          message: err,
-        });
-      } else {
-        res.status(200).send({
-          success: "true",
-          //   message: "reference of product deleted succesfully",
           result: result,
         });
       }

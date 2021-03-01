@@ -56,13 +56,12 @@ const {
 } = require("./controller/subCategory.js");
 
 const {
-  addRef_prod_fav,
-  editRef_prod_fav,
-  getRef_prod_fav,
-  deleteRef_prod_fav,
-  userRef_prod_fav,
-  userStoreRef_prod_fav,
-} = require("./controller/ref_prod_fav.js");
+  addService,
+  editService,
+  getService,
+  deleteService,
+  getServices,
+} = require("./controller/service.js");
 const {
   addFriend_req,
   getUserFriendRequests,
@@ -90,16 +89,12 @@ app.post("/v1/addFriend", checkAuth, addFriend);
 app.get("/v1/getUserFriends/:id", checkAuth, getUserFriends);
 
 
-app.get("/v1/ref_prod_fav/:id", checkAuth, getRef_prod_fav);
-app.post("/v1/ref_prod_fav", checkAuth, addRef_prod_fav);
-app.put("/v1/ref_prod_fav/:id", checkAuth, editRef_prod_fav);
-app.delete("/v1/ref_prod_fav/:id", checkAuth, deleteRef_prod_fav);
-app.get("/v1/user/ref_prod_fav/:id", checkAuth, userRef_prod_fav);
-app.get(
-  "/v1/store/user/ref_prod_fav/:id/:storeID",
-  checkAuth,
-  userStoreRef_prod_fav
-);
+app.get("/v1/service/:id", checkAuth, getService);
+app.get("/v1/ref_prod_fav", checkAuth, getServices);
+app.post("/v1/service", checkAuth, addService);
+app.put("/v1/service/:id", checkAuth, editService);
+app.delete("/v1/service/:id", checkAuth, deleteService);
+
 
 
 
